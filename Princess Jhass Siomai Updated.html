@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Princess Jhass Siomai</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4F8;--surface:#fff;--ink:#3A1440;--muted:#7D5F84;--pink:#D92C7C;--pink-ink:#fff;--soft:#FFD6E7;--line:#F0CFE0;--ok:#1F7A4A;--warn:#9A5B00;--bad:#C0243A;--gold:#F5C242;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1E0C22;--surface:#2B1530;--ink:#FBE9F3;--muted:#C9A5D0;--pink:#FF6FAE;--pink-ink:#2B0A20;--soft:#4A1F4F;--line:#4A2A50;--ok:#6FD39A;--warn:#F2B35A;--bad:#FF8296;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1E0C22;--surface:#2B1530;--ink:#FBE9F3;--muted:#C9A5D0;--pink:#FF6FAE;--pink-ink:#2B0A20;--soft:#4A1F4F;--line:#4A2A50;--ok:#6FD39A;--warn:#F2B35A;--bad:#FF8296;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;margin:0;line-height:1.15}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+header{background:var(--pink);color:var(--pink-ink);padding:28px 20px 56px;text-align:center;position:relative;overflow:hidden}
+header h1{font-size:clamp(2.2rem,8vw,4rem);font-weight:700;letter-spacing:.5px}
+header p{margin:6px auto 0;max-width:34ch;font-weight:600;opacity:.95}
+.crown{font-size:2.2rem;display:block;animation:bob 3s ease-in-out 1}
+@keyframes bob{0%{transform:translateY(-14px) rotate(-8deg);opacity:0}60%{transform:translateY(3px) rotate(4deg);opacity:1}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.crown{animation:none}}
+nav{display:flex;gap:6px;justify-content:center;margin:-26px auto 0;position:relative;padding:0 12px}
+nav button{border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 22px;border-radius:999px;font-weight:700}
+nav button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{max-width:1080px;margin:0 auto;padding:22px 16px 60px}
+.grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:860px){.grid.two{grid-template-columns:1.6fr 1fr;align-items:start}}
+.menu{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.item{display:flex;flex-direction:column;gap:6px}
+.item .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.price{font-family:Fredoka;font-weight:600;color:var(--pink);font-size:1.2rem}
+.muted{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700;background:var(--soft)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.btn{border:0;background:var(--pink);color:var(--pink-ink);padding:10px 16px;border-radius:12px;font-weight:700}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700}
+label{display:block;font-weight:700;margin:12px 0 4px;font-size:.92rem}
+input,select,textarea{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0}
+.total{border-top:2px dashed var(--line);margin-top:8px;padding-top:10px;font-family:Fredoka;font-size:1.3rem}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:22px}
+.stat b{display:block;font-family:Fredoka;font-size:1.8rem}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td input{width:90px;padding:6px 8px}
+.bar{height:8px;border-radius:99px;background:var(--soft);overflow:hidden;min-width:80px}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar.low i{background:var(--bad)}
+.order{margin-bottom:10px}
+.order .head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.track{background:var(--soft);border-radius:14px;padding:14px;margin-bottom:16px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;z-index:20;max-width:90vw}
+h2{margin:0 0 12px;font-size:1.5rem}
+.cat{margin:18px 0 10px;font-size:1.2rem;color:var(--pink)}
+</style>
+</head>
+<body>
+<header>
+  <span class="crown" aria-hidden="true">👑</span>
+  <h1>Princess Jhass Siomai</h1>
+  <p>Rice meals and chowpan, made fresh to order. Order ahead and skip the line.</p>
+</header>
+<nav aria-label="Switch view">
+  <button id="tab-order" aria-pressed="true">Order</button>
+  <button id="tab-staff" aria-pressed="false">Staff</button>
+</nav>
+<main id="app"></main>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+const CATS=['Plain rice meals','Chowpan meals'];
+const M=(cat,id,name,desc,price,use)=>({id,cat:CATS[cat],name,desc,price,use:{...use,box:1}});
+const MENU=[
+ M(0,'friedsio','3pcs Siomai Fried with Rice','Crispy fried siomai with rice',55,{sio:3,rice:1}),
+ M(0,'steamsio','3pcs Siomai Rice Steam with Rice','Steamed siomai with rice',50,{sio:3,rice:1}),
+ M(0,'burger','Burger Steak with Rice','Burger steak in gravy with rice',75,{burger:1,rice:1}),
+ M(0,'burgerfries','Burger Steak with Rice and Fries','Burger steak, rice and fries',75,{burger:1,rice:1,fries:1}),
+ M(0,'cbreast','Chicken Breast with Rice','Chicken breast with rice',75,{cbreast:1,rice:1}),
+ M(0,'sisig','Creamy Sisig','Our creamy sisig',109,{sisig:1}),
+ M(0,'hotdog','Tender Juicy Hotdog with Rice and Egg','Hotdog, rice and egg',85,{hotdog:1,rice:1,egg:1}),
+ M(0,'tapa','Tapa with Rice and Egg','Beef tapa, rice and egg',109,{tapa:1,rice:1,egg:1}),
+ M(0,'liempo','Liempo with Rice and Egg','Grilled liempo, rice and egg',119,{liempo:1,rice:1,egg:1}),
+ M(0,'chicken','Chicken with Rice and Egg','Chicken, rice and egg',109,{chicken:1,rice:1,egg:1}),
+ M(0,'longga','Longganisa with Rice and Egg','Longganisa, rice and egg',80,{longga:2,rice:1,egg:1}),
+ M(0,'wings','3pcs Wings with Rice','Three wings with rice',119,{wings:3,rice:1}),
+ M(0,'lechon','Lechon Kawali with Rice and Egg','Crispy lechon kawali, rice and egg',109,{lechon:1,rice:1,egg:1}),
+ M(0,'daing','Daing with Rice','Fried daing with rice',99,{daing:1,rice:1}),
+ M(1,'lechonchow','Lechon Kawali Chowpan','Lechon kawali on chowpan',99,{lechon:1,chow:1}),
+ M(1,'chickchow','Chicken Chowpan','Chicken on chowpan',99,{chicken:1,chow:1}),
+ M(1,'hungchow','Hungarian Chowpan','Hungarian sausage on chowpan',89,{hung:1,chow:1}),
+ M(1,'spamchow','2pcs SPAM Chowpan','Two slices of SPAM on chowpan',70,{spam:2,chow:1}),
+ M(1,'hotdogchow','Tender Juicy Hotdog Chowpan','Hotdog on chowpan',75,{hotdog:1,chow:1}),
+ M(1,'nugchow','3pcs Nuggets Chowpan','Three nuggets on chowpan',70,{nug:3,chow:1}),
+ M(1,'longchow','2pcs Longganisa Chowpan','Two longganisa on chowpan',99,{longga:2,chow:1})
+];
+const I=(name,unit,qty,low)=>({name,unit,qty,max:qty,low});
+const INV0={
+ rice:I('Cooked rice','cups',80,15),
+ chow:I('Chowpan noodles','servings',50,10),
+ egg:I('Eggs','pcs',60,12),
+ sio:I('Siomai','pcs',150,30),
+ burger:I('Burger steak patties','pcs',30,8),
+ fries:I('Fries','servings',30,8),
+ cbreast:I('Chicken breast','pcs',25,6),
+ chicken:I('Chicken (fried)','pcs',40,10),
+ sisig:I('Creamy sisig','servings',25,6),
+ hotdog:I('Tender juicy hotdogs','pcs',50,12),
+ tapa:I('Tapa','servings',25,6),
+ liempo:I('Liempo','servings',25,6),
+ longga:I('Longganisa','pcs',60,12),
+ wings:I('Chicken wings','pcs',60,12),
+ lechon:I('Lechon kawali','servings',30,8),
+ daing:I('Daing','pcs',20,5),
+ hung:I('Hungarian sausage','pcs',25,6),
+ spam:I('SPAM slices','pcs',40,10),
+ nug:I('Nuggets','pcs',60,12),
+ box:I('Takeout boxes','pcs',120,25)
+};
+const KEY='pjs-state-v2';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(!S||!S.inv)S={inv:JSON.parse(JSON.stringify(INV0)),orders:[],seq:1};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let view='order',cart={},lastId=null;
+const $=s=>document.querySelector(s),app=$('#app');
+const peso=n=>'₱'+n.toLocaleString('en-PH');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const avail=m=>Math.min(...Object.entries(m.use).map(([k,u])=>Math.floor(S.inv[k].qty/u)));
+const inCart=id=>cart[id]||0;
+const cartTotal=()=>MENU.reduce((t,m)=>t+m.price*inCart(m.id),0);
+const stamp=t=>new Date(t).toLocaleTimeString('en-PH',{hour:'numeric',minute:'2-digit'});
+const stLabel={preparing:'Preparing',ready:'Ready for pickup',done:'Completed',cancelled:'Cancelled'};
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+
+function renderOrder(){
+ const lines=MENU.filter(m=>inCart(m.id));
+ const last=S.orders.find(o=>o.id===lastId);
+ app.innerHTML=`${last?`<div class="track"><b>Order #${last.id} for ${esc(last.name)}:</b> ${stLabel[last.status]}. ${last.status==='ready'?'Come get it while it’s hot!':last.status==='preparing'?'We’re steaming your siomai now.':''}</div>`:''}
+ <div class="grid two"><section><h2>Today’s menu</h2>
+ ${CATS.map(c=>`<h3 class="cat">${c}</h3><div class="menu">`+MENU.filter(m=>m.cat===c).map(m=>{const a=avail(m)-inCart(m.id),sold=avail(m)<=0;return`<div class="card item"><div class="top"><h3>${m.name}</h3><span class="price">${peso(m.price)}</span></div>
+ <span class="muted">${m.desc}</span>
+ <span class="${sold?'bad':a<=5?'warn':'ok'}" style="font-weight:700;font-size:.88rem">${sold?'Sold out':a<=5?`Only ${a} left`:'Available'}</span>
+ <div class="qty"><button data-act="dec" data-id="${m.id}" aria-label="Remove one ${m.name}" ${inCart(m.id)?'':'disabled'}>−</button><b aria-live="polite">${inCart(m.id)}</b><button data-act="inc" data-id="${m.id}" aria-label="Add one ${m.name}" ${a>0?'':'disabled'}>+</button></div></div>`}).join('')+'</div>').join('')}
+ </section>
+ <aside class="card"><h2>Your order</h2>
+ ${lines.length?lines.map(m=>`<div class="row"><span>${inCart(m.id)} × ${m.name}</span><span>${peso(inCart(m.id)*m.price)}</span></div>`).join('')+`<div class="row total"><span>Total</span><span>${peso(cartTotal())}</span></div>`:'<p class="muted">Your cart is empty. Add something from the menu.</p>'}
+ <label for="cn">Your name</label><input id="cn" autocomplete="name" placeholder="e.g. Maria">
+ <label for="ct">How will you get it?</label><select id="ct"><option>Pickup</option><option>Dine in</option></select>
+ <label for="cx">Notes (optional)</label><textarea id="cx" rows="2" placeholder="Extra chili, no sauce…"></textarea>
+ <p style="margin:14px 0 0"><button class="btn" style="width:100%" data-act="place" ${lines.length?'':'disabled'}>Place order</button></p></aside></div>`;
+}
+
+function renderStaff(){
+ const today=new Date().toDateString(),od=S.orders.filter(o=>new Date(o.time).toDateString()===today&&o.status!=='cancelled');
+ const lowN=Object.values(S.inv).filter(i=>i.qty<=i.low).length;
+ const open=S.orders.filter(o=>o.status==='preparing'||o.status==='ready');
+ app.innerHTML=`<div class="stats">
+ <div class="card stat"><span class="muted">Orders today</span><b>${od.length}</b></div>
+ <div class="card stat"><span class="muted">Sales today</span><b>${peso(od.reduce((t,o)=>t+o.total,0))}</b></div>
+ <div class="card stat"><span class="muted">Open orders</span><b>${open.length}</b></div>
+ <div class="card stat"><span class="muted">Low-stock items</span><b class="${lowN?'bad':'ok'}">${lowN}</b></div></div>
+ <div class="grid two"><section><h2>Orders</h2>
+ ${S.orders.length?S.orders.slice(0,30).map(o=>`<div class="card order"><div class="head"><b>#${o.id} · ${esc(o.name)} · ${o.type}</b><span class="badge">${stLabel[o.status]}</span></div>
+ <div class="muted">${stamp(o.time)} · ${peso(o.total)}</div>
+ <div>${o.items.map(i=>`${i.q} × ${MENU.find(m=>m.id===i.id).name}`).join(', ')}</div>
+ ${o.note?`<div class="muted">Note: ${esc(o.note)}</div>`:''}
+ ${o.status==='preparing'||o.status==='ready'?`<div class="actions"><button class="btn" data-act="adv" data-id="${o.id}">${o.status==='preparing'?'Mark ready':'Mark completed'}</button><button class="btn alt" data-act="cancel" data-id="${o.id}">Cancel and restock</button></div>`:''}</div>`).join(''):'<p class="muted">No orders yet. New orders will show up here.</p>'}
+ </section>
+ <section><h2>Inventory</h2><div class="card scroll"><table><thead><tr><th>Item</th><th>Stock</th><th>Level</th><th>Add or remove</th></tr></thead><tbody>
+ ${Object.entries(S.inv).map(([k,i])=>{const p=Math.min(100,Math.round(i.qty/i.max*100)),low=i.qty<=i.low;return`<tr><td><b>${i.name}</b>${low?'<br><span class="bad" style="font-size:.8rem;font-weight:700">Low, restock soon</span>':''}</td>
+ <td>${i.qty} ${i.unit}</td><td><div class="bar ${low?'low':''}"><i style="width:${p}%"></i></div></td>
+ <td><input type="number" id="adj-${k}" aria-label="Amount for ${i.name}" placeholder="±"> <button class="btn alt" data-act="adj" data-id="${k}">Update</button></td></tr>`}).join('')}
+ </tbody></table></div>
+ <p><button class="btn alt" data-act="reset">Reset demo data</button></p></section></div>`;
+}
+
+function render(){
+ $('#tab-order').setAttribute('aria-pressed',view==='order');
+ $('#tab-staff').setAttribute('aria-pressed',view==='staff');
+ view==='order'?renderOrder():renderStaff();
+}
+function go(v){view=v;history.replaceState(null,'','#'+v);render();window.scrollTo(0,0)}
+$('#tab-order').onclick=()=>go('order');
+$('#tab-staff').onclick=()=>go('staff');
+
+app.addEventListener('click',e=>{
+ const b=e.target.closest('[data-act]');if(!b)return;
+ const act=b.dataset.act,id=b.dataset.id;
+ if(act==='inc'||act==='dec'){
+  const m=MENU.find(x=>x.id===id);
+  if(act==='inc'&&avail(m)-inCart(id)>0)cart[id]=inCart(id)+1;
+  if(act==='dec'&&inCart(id)>0)cart[id]=inCart(id)-1;
+  const n=$('#cn')?.value,t=$('#ct')?.value,x=$('#cx')?.value;renderOrder();
+  if($('#cn')){$('#cn').value=n;$('#ct').value=t;$('#cx').value=x}
+ }
+ if(act==='place'){
+  const name=$('#cn').value.trim();
+  if(!name){toast('Enter your name so we can call you when it’s ready.');$('#cn').focus();return}
+  const items=MENU.filter(m=>inCart(m.id)).map(m=>({id:m.id,q:inCart(m.id)}));
+  for(const it of items){const m=MENU.find(x=>x.id===it.id);if(avail(m)<it.q){toast(m.name+' just ran low. Please lower the quantity.');return}}
+  items.forEach(it=>{const m=MENU.find(x=>x.id===it.id);for(const[k,u]of Object.entries(m.use))S.inv[k].qty-=u*it.q});
+  const o={id:S.seq++,name,type:$('#ct').value,note:$('#cx').value.trim(),items,total:cartTotal(),status:'preparing',time:Date.now()};
+  S.orders.unshift(o);lastId=o.id;cart={};save();renderOrder();toast('Order #'+o.id+' placed. Thank you, '+name+'!');
+ }
+ if(act==='adv'){const o=S.orders.find(x=>x.id==id);o.status=o.status==='preparing'?'ready':'done';save();renderStaff();toast('Order #'+o.id+' updated')}
+ if(act==='cancel'){
+  const o=S.orders.find(x=>x.id==id);o.status='cancelled';
+  o.items.forEach(it=>{const m=MENU.find(x=>x.id===it.id);for(const[k,u]of Object.entries(m.use))S.inv[k].qty+=u*it.q});
+  save();renderStaff();toast('Order #'+o.id+' cancelled and stock returned');
+ }
+ if(act==='adj'){
+  const v=parseInt($('#adj-'+id).value,10);
+  if(!v){toast('Enter a number, such as 50 to add or -10 to remove.');return}
+  S.inv[id].qty=Math.max(0,S.inv[id].qty+v);
+  if(S.inv[id].qty>S.inv[id].max)S.inv[id].max=S.inv[id].qty;
+  save();renderStaff();toast(S.inv[id].name+' updated');
+ }
+ if(act==='reset'&&confirm('Reset all stock and orders to the starting demo data?')){
+  S={inv:JSON.parse(JSON.stringify(INV0)),orders:[],seq:1};cart={};lastId=null;save();renderStaff();
+ }
+});
+if(location.hash==='#staff')view='staff';
+render();
+</script>
+</body>
+</html>
